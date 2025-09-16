@@ -1,0 +1,104 @@
+#include <stdio.h>
+
+int main() {
+    int product_count;
+    int stock[100];
+    int sales[100];
+    int inventory[100];
+    int selected_id;
+
+    int total_stock = 0;
+    int total_sales = 0;
+    float sales_rate = 0.0;
+
+    int max_sales = -1;
+    int min_sales = -1;
+    int max_sales_id = 0;
+    int min_sales_id = 0;
+
+    
+    
+    printf("상품 개수(종류) 입력 (1-100): ");
+    scanf("%d", &product_count);
+
+    
+    if (product_count < 1 || product_count > 100) {
+        printf("상품 개수는 1에서 100 사이여야 합니다.\n");
+        return 1; // Exit with an error
+    }
+
+    
+    printf("상품 별 입고수량 입력:\n");
+    for (int i = 0; i < product_count; i++) {
+        scanf("%d", &stock[i]);
+    }
+
+    
+    printf("상품 별 판매수량 입력:\n");
+    for (int i = 0; i < product_count; i++) {
+        scanf("%d", &sales[i]);
+    }
+
+    
+    for (int i = 0; i < product_count; i++) {
+        inventory[i] = stock[i] - sales[i];
+
+        total_stock += stock[i];
+        total_sales += sales[i];
+
+        if (i == 0) {
+            max_sales = sales[i];
+            min_sales = sales[i];
+            max_sales_id = 1;
+            min_sales_id = 1;
+        } else {
+            if (sales[i] > max_sales) {
+                max_sales = sales[i];
+                max_sales_id = i + 1; 
+            }
+            if (sales[i] < min_sales) {
+                min_sales = sales[i];
+                min_sales_id = i + 1; 
+            }
+        }
+    }
+    
+    
+    if (total_stock > 0) {
+        sales_rate = ((float)total_sales / total_stock) * 100;
+    }
+
+    
+    printf("\n재고를 확인할 상품 ID 입력하세요: ");
+    scanf("%d", &selected_id);
+    if (selected_id >= 1 && selected_id <= product_count) {
+        printf("=> 입력한 해당 ID(%d) 제품의 재고 수량: %d\n\n", selected_id, inventory[selected_id - 1]);
+    } else {
+        printf("잘못된 ID입니다.\n\n");
+    }
+
+    printf("--- 전체 재고 분석 결과 ---\n");
+
+    
+    printf("재고수량: ");
+    for (int i = 0; i < product_count; i++) {
+        printf("%d ", inventory[i]);
+    }
+    printf("\n");
+
+    
+    printf("총 판매량: %d (판매율 %.2f%%)\n", total_sales, sales_rate);
+
+    
+    printf("가장 많이 판매된 상품: ID %d, 판매량 %d\n", max_sales_id, max_sales);
+    printf("가장 적게 판매된 상품: ID %d, 판매량 %d\n", min_sales_id, min_sales);
+
+    
+    for (int i = 0; i < product_count; i++) {
+        if (inventory[i] <= 2) {
+            printf("상품 ID %d: 재고부족(%d)\n", i + 1, inventory[i]);
+        }
+    }
+
+    return 0;
+}

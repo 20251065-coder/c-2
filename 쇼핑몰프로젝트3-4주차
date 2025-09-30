@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+
 #define NUM_PRODUCTS 5
 #define MAX_NAME_LENGTH 50
 
@@ -121,14 +122,17 @@ int main() {
                 break;
             }
             case 4: {
-                printf(">>> 상품명을 입력합니다.\n");
-                for (int i = 0; i < NUM_PRODUCTS; i++) {
-                    printf("> ID %d 상품명 : ", i + 1);
-                    scanf("%s", product_names[i]);
-                }
-                printf(">>> 상품명 입력이 완료되었습니다.\n");
-                break;
+            printf(">>> 상품명을 입력합니다.\n");
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+            for (int i = 0; i < NUM_PRODUCTS; i++) {
+                printf("> ID %d 상품명 : ", i + 1);
+                fgets(product_names[i], MAX_NAME_LENGTH, stdin);
+                product_names[i][strcspn(product_names[i], "\n")] = 0;
             }
+            printf(">>> 상품명 입력이 완료되었습니다.\n");
+            break;
+        }
             case 5:
                 printf("프로그램을 종료합니다.\n");
                 return 0;

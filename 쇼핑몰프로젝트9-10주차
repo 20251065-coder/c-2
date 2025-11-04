@@ -3,7 +3,7 @@
 
 #define MAX_PRODUCTS 5
 #define MAX_NAME_LENGTH 50
-#define DATA_FILE "products.dat"
+#define DATA_FILE "재고현황.dat"
 
 struct Product {
     int id;

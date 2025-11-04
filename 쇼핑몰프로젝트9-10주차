@@ -58,7 +58,7 @@ int main() {
                     products[index].id = id_input;
                     printf("상품명: ");
                     scanf(" %[^\n]", products[index].name);
-                    printf("판매가격: ");
+                    printf("판매가격(원): ");
                     scanf(" %d", &products[index].price);
                     products[index].is_active = 1;
                 }

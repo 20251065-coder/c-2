@@ -139,7 +139,7 @@ int main() {
                 for (int i = 0; i < MAX_PRODUCTS; i++) {
                     if (products[i].is_active) {
                         int current_inventory = products[i].stock - products[i].sales;
-                        printf("ID:%d | 상품명:%s | 입고재고:%d | 개당가격(원):%d | 현재재고:%d | 총판매량:%d |  총판매금액:%lld원\n",
+                        printf("ID:%d | 상품명:%s | 입고재고:%d | 개당가격:%d원 | 현재재고:%d | 총판매량:%d | 총판매금액:%lld원\n",
                                products[i].id, products[i].name, products[i].stock, products[i].price, current_inventory, products[i].sales, products[i].total_sales_amount);
                         
                         total_stock += products[i].stock;
